@@ -9,7 +9,7 @@ set(CMAKE_C_COMPILER "clang")
 set(CMAKE_BUILD_TYPE "Release")
 
 # set c++ compiler flags -on warning and using of new c++ strandard library ISO 2011 (-std=c++0x)
-set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -std=c++14 -stdlib=libc++ -O3")
 
 # message for set the compiler and its flags and type of build(release)
 message ("user define: CMAKE_BUILD_TYPE is ${CMAKE_BUILD_TYPE}")

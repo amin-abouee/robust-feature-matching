@@ -1,20 +1,25 @@
 # relase binary folder
-set(CMAKE_RELEASE_DIR "../bin/release")
+set(CMAKE_RELEASE_DIR "../build/release")
 # debug binary folder
-set(CMAKE_DEBUG_DIR "../bin/debug")
+set(CMAKE_DEBUG_DIR "../build/debug")
 
-# find openCV
-if( APPLE )
-    set( OpenCV_DIR "/opt/local/lib/cmake" )
-endif()
 find_package( OpenCV REQUIRED )
 
-add_executable (robust_feature_matching main.cpp)
-target_link_libraries (robust_feature_matching ${OpenCV_LIBS})
+set(HEADER_PATH ${PROJECT_SOURCE_DIR}/headers)
+include_directories(${HEADER_PATH})
+
+set(HEADER_FILES ${HEADER_PATH}/RobustFeatureMatching.hpp)
+set(SOURCES_FILES main.cpp RobustFeatureMatching.cpp)
+
+add_library(RobustFeatureMatchingLib SHARED RobustFeatureMatching.cpp)
+target_link_libraries (RobustFeatureMatchingLib ${OpenCV_LIBS})
+
+add_executable (RobustFeatureMatching ${SOURCES_FILES} ${HEADER_FILES})
+target_link_libraries (RobustFeatureMatching ${OpenCV_LIBS})
 
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
-	set_target_properties(robust_feature_matching PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_DEBUG_DIR})
-	set_target_properties(robust_feature_matching PROPERTIES OUTPUT_NAME robust_feature_matching${BUILD_PREFIX})
+	set_target_properties(RobustFeatureMatching PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_DEBUG_DIR})
+	set_target_properties(RobustFeatureMatching PROPERTIES OUTPUT_NAME RobustFeatureMatching${BUILD_PREFIX})
 else()
-	set_target_properties(robust_feature_matching PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RELEASE_DIR})
+	set_target_properties(RobustFeatureMatching PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RELEASE_DIR})
 endif()
