@@ -10,15 +10,11 @@ RobustFeatureMatching::RobustFeatureMatching(float inputRatioNearestNeighborPara
       fundamentalConfidenceProbablyParam(inputFundamentalConfidenceProbablyParam),
       thresholdNumPointsParam(inputThresholdNumPointsParam)
 {
-    // ratioNearestNeighborParam = inputRatioNearestNeighborParam;
-    // fundamentalReprojectionErrorParam =
-    // inputFundamentalReprojectionErrorParam;
-    // fundamentalConfidenceProbablyParam =
-    // inputFundamentalConfidenceProbablyParam;
-    // thresholdNumPointsParam = inputThresholdNumPointsParam;
 }
 
-RobustFeatureMatching::~RobustFeatureMatching() {}
+RobustFeatureMatching::~RobustFeatureMatching()
+{
+}
 std::vector<cv::DMatch> RobustFeatureMatching::run(cv::Mat inputReferenceImage, cv::Mat inputFollowingImage)
 {
     referenceImage = inputReferenceImage;
@@ -141,13 +137,19 @@ void RobustFeatureMatching::epipolarConstraint()
     }
 }
 
-std::vector<cv::DMatch> RobustFeatureMatching::getBestBruteForceMatchesVector() { return bestBruteForceMatchesVector; }
+std::vector<cv::DMatch> RobustFeatureMatching::getBestBruteForceMatchesVector()
+{
+    return bestBruteForceMatchesVector;
+}
 std::vector<cv::DMatch> RobustFeatureMatching::getBestNearestNeighborMatchesVector()
 {
     return bestNearestNeighborMatchesVector;
 }
 
-std::vector<cv::DMatch> RobustFeatureMatching::getBestSymmetricMatchesVector() { return bestSymmetricMatchesVector; }
+std::vector<cv::DMatch> RobustFeatureMatching::getBestSymmetricMatchesVector()
+{
+    return bestSymmetricMatchesVector;
+}
 std::vector<cv::DMatch> RobustFeatureMatching::getBestEpipolarConstraintMatchesVector()
 {
     return bestEpipolarConstraintMatchesVector;
