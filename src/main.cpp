@@ -9,6 +9,11 @@
 
 int main(int argc, char *argv[])
 {
+    if (argc < 2)
+    {
+        std::cerr << "number of input parameters are not sufficient." << std::endl;
+        return 1;
+    }
     cv::Mat first_image = cv::imread(argv[1], 0);
     cv::Mat second_image = cv::imread(argv[2], 0);
     RobustFeatureMatching matcher;

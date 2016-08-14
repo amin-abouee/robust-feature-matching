@@ -1,18 +1,21 @@
-# relase binary folder
-set(CMAKE_RELEASE_DIR "../build/release")
-# debug binary folder
-set(CMAKE_DEBUG_DIR "../build/debug")
 
 find_package( OpenCV REQUIRED )
 
-set(HEADER_PATH ${PROJECT_SOURCE_DIR}/headers)
+set(HEADER_PATH ${PROJECT_SOURCE_DIR}/include)
 include_directories(${HEADER_PATH})
 
-set(HEADER_FILES ${HEADER_PATH}/RobustFeatureMatching.hpp)
-set(SOURCES_FILES main.cpp RobustFeatureMatching.cpp)
+file(GLOB HEADER_FILES ${HEADER_PATH}/*.hpp)
+file(GLOB SOURCES_FILES *.cpp)
+# set(SOURCES_FILES main.cpp RobustFeatureMatching.cpp)
 
+file(MAKE_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+set(LIB_PATH ${PROJECT_SOURCE_DIR}/lib/RobustFeatureMatchingLib)
 add_library(RobustFeatureMatchingLib SHARED RobustFeatureMatching.cpp)
 target_link_libraries (RobustFeatureMatchingLib ${OpenCV_LIBS})
+
+set(BUILD_PATH ${PROJECT_SOURCE_DIR}/build)
+set(CMAKE_RELEASE_DIR ${BUILD_PATH}/release)
+set(CMAKE_DEBUG_DIR ${BUILD_PATH}/debug)
 
 add_executable (RobustFeatureMatching ${SOURCES_FILES} ${HEADER_FILES})
 target_link_libraries (RobustFeatureMatching ${OpenCV_LIBS})
